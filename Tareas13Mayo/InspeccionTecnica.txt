@@ -1,0 +1,96 @@
+package com.clasesBean;
+
+public class InspeccionTecnica {
+
+    private String codigo; // 3 letras + 3 números
+    private int anioInspeccion;
+    private String estadoVehiculo; // "Aprobado" o "Rechazado"
+    private double co2; // Nivel de emisiones de CO2
+
+    // Constructor por defecto
+    public InspeccionTecnica() {
+        this.codigo = "";
+        this.anioInspeccion = 0;
+        this.estadoVehiculo = "";
+        this.co2 = 0.0;
+    }
+
+    // Constructor con parámetros y validación del CO2
+    public InspeccionTecnica(String codigo, int anioInspeccion, String estadoVehiculo, double co2) {
+        if (validarCodigo(codigo)) {
+            this.codigo = codigo;
+        } else {
+            this.codigo = ""; //Valor por defecto si no es válido
+            System.out.println("Error: El código no es válido. Debe tener 3 letras seguidas de 3 números.");
+        }
+
+        this.anioInspeccion = anioInspeccion;
+        this.co2 = co2;
+
+        // Validación del estado del vehículo según CO2
+        if (co2 > 4.5) {
+            this.estadoVehiculo = "Rechazado";
+        } else {
+            this.estadoVehiculo = "Aprobado";
+        }
+    }
+
+    // Getters y Setters
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        if (validarCodigo(codigo)) {
+            this.codigo = codigo;
+        } else {
+            System.out.println("Error: El código no es válido, debería tener 3 letras seguidas de 3 números.");
+        }
+    }
+
+    public int getAnioInspeccion() {
+        return anioInspeccion;
+    }
+
+    public void setAnioInspeccion(int anioInspeccion) {
+        this.anioInspeccion = anioInspeccion;
+    }
+
+    public String getEstadoVehiculo() {
+        return estadoVehiculo;
+    }
+
+    public void setEstadoVehiculo(String estadoVehiculo) {
+        this.estadoVehiculo = estadoVehiculo;
+    }
+
+    public double getCo2() {
+        return co2;
+    }
+
+    public void setCo2(double co2) {
+        this.co2 = co2;
+        // Actualizar el estado del vehículo basado en el nuevo nivel de CO2
+        if (co2 > 4.5) {
+            this.estadoVehiculo = "Rechazado";
+        } else {
+            this.estadoVehiculo = "Aprobado";
+        }
+    }
+
+    // Método para validar el código (3 letras + 3 números)
+    public boolean validarCodigo(String codigo) {
+        if (true) {
+        }
+        return false;
+    }
+
+    // Método para devolver un resumen del resultado de la inspección
+    public String detalleInspeccion() {
+        return "Inspección Técnica [Código: " + codigo + ", Año de Inspección: " + anioInspeccion
+                + ", Estado del Vehículo: " + estadoVehiculo + ", Nivel de CO2: " + co2 + "]";
+    }
+}
+
+	
+	

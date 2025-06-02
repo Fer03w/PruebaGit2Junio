@@ -1,0 +1,105 @@
+package com.clasesBean;
+
+public class Conductor {
+
+	private String nombreCompleto;
+	private String cedula;
+	private String licenciaTipo; // A, B, C
+	private int experiencia; // Años
+
+	// Constructor por defecto
+	public Conductor() {
+		this.nombreCompleto = "";
+		this.cedula = "";
+		this.licenciaTipo = "";
+		this.experiencia = 0;
+	}
+
+	// Constructor con parámetros
+	public Conductor(String nombreCompleto, String cedula, String licenciaTipo, int experiencia) {
+		this.nombreCompleto = nombreCompleto;
+		this.cedula = cedula;
+		if (!setLicenciaTipo(licenciaTipo)) {
+			this.licenciaTipo = ""; // Valor por defecto si no es válido
+		}
+		if (!setExperiencia(experiencia)) {
+			this.experiencia = 0; // Valor por defecto si no es válido
+		}
+	}
+
+	// Getters y Setters
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
+	}
+
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
+	public String getLicenciaTipo() {
+		return licenciaTipo;
+	}
+
+	// Validar que solo se acepten "A", "B", "C"
+	public boolean setLicenciaTipo(String licenciaTipo) {
+		if (licenciaTipo.equalsIgnoreCase("A") || licenciaTipo.equalsIgnoreCase("B") || licenciaTipo.equalsIgnoreCase("C")) {
+			this.licenciaTipo = licenciaTipo.toUpperCase();
+			return true;
+		} else {
+			System.out.println("Error: El tipo de licencia debe ser 'A', 'B' o 'C'.");
+			return false;
+		}
+	}
+
+	public int getExperiencia() {
+		return experiencia;
+	}
+
+
+	// Validar que experiencia sea mayor o igual a 0
+	public boolean setExperiencia(int experiencia) {
+		if (experiencia >= 0) {
+			this.experiencia = experiencia;
+			return true;
+		} else {
+			System.out.println("Error: La experiencia no puede ser negativa.");
+			return false;
+		}
+	}
+
+	// Método para validar la cédula ecuatoriana (módulo 10)
+
+	public boolean validarCedula(String cedula) {
+		if (cedula == null || cedula.length() != 10) {
+			System.out.println("Error: La cédula debe contener 10 dígitos");
+			return false;
+		}
+		//Validar que todos los caracteres sean dígitos
+		for (int i = 0; i < 10; i++) {
+			char c = cedula.charAt(i);
+			if (c < '0' || c > '9') {
+				return false;
+			}
+		}
+		///////
+		///////
+		return true;
+	}
+
+
+	// Método para devolver un resumen de los datos del conductor
+	public String resumenConductor() {
+		return "Conductor: " + nombreCompleto + ", Cédula: " + cedula + ", Licencia: " + licenciaTipo
+				+ ", Experiencia: " + experiencia + " años.";
+	}
+
+}
+

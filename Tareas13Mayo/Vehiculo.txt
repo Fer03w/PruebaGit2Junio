@@ -1,0 +1,119 @@
+package com.clasesBean;
+
+public class Vehiculo {
+	private String placa; // (formato AAA-1234)
+	private String marca;
+	private int anioFabricacion;
+	private int idRegistro; //4 dígitos y el último deberá ser nUmero primo
+
+	// Constructor por defecto
+	public Vehiculo() {
+		this.placa = "";
+		this.marca = "";
+		this.anioFabricacion = 0;
+		this.idRegistro = 0;
+	}
+
+	// Constructor con validación directa del idRegistro
+	public Vehiculo(String placa, String marca, int anioFabricacion, int idRegistro) {
+		this.placa = placa;
+		this.marca = marca;
+
+		//Validar y asignar año de fabricación
+		if (anioFabricacion >= 1990 && anioFabricacion <= 2025) {
+			this.anioFabricacion = anioFabricacion;
+		} else {
+			System.out.println("Error, año de fabricación se considera como no valido.");
+			// Asignar 0
+			this.anioFabricacion = 0;
+		}
+
+		// Validar y asignar ID de registro
+		if (validarRegistro(idRegistro)) {
+			this.idRegistro = idRegistro;
+		} else {
+			System.out.println("Error: ID de registro inválido. Se asignará 0 como valor predeterminado.");
+			this.idRegistro = 0;
+		}
+	}
+
+
+	// Getters y Setters
+	public String getPlaca() {
+		return placa;
+	}
+
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public int getAnioFabricacion() {
+		return anioFabricacion;
+	}
+
+	//validar que el anioFabricacion esté entre 1990 y 2025
+	
+	public void setAnioFabricacion(int anioFabricacion) {
+		if (anioFabricacion >= 1990 && anioFabricacion <= 2025) {
+			this.anioFabricacion = anioFabricacion;
+		} else {
+			System.out.println("Error: El año de fabricacion debe estar entre 1990 y 2025.");
+		}
+	}
+
+	public int getIdRegistro() {
+		return idRegistro;
+	}
+
+	public void setIdRegistro(int idRegistro) {
+		if (validarRegistro(idRegistro)) {
+			this.idRegistro = idRegistro;
+		} else {
+			System.out.println("Error: El ID de registro debe tener 4 dígitos y el último debe ser un número primo.");
+		}
+	}
+
+	// Métodos requeridos
+
+	
+	//validarIDregistro(int id), retornar true si es que tiene 4 digitos y su ultimo digito es numero primo
+	
+	public boolean validarRegistro(int id) {
+		String idVal;
+		if (true) {
+			// Extraer el último dígito
+			
+		}
+		System.out.println("Error: el ID de registro no tiene 4 digitos.");
+		return false;
+	}
+
+	// Verificar si un número es primo
+	private boolean calcularPrimo(int numero) {
+		if (numero <= 1) {
+			return false;
+		}
+		
+		for (int i = 2; i <= Math.sqrt(numero); i++) {
+			if (numero % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	// Funcion mostrarDatos() Mostrar los datos del vehículo como resumen
+	public String mostrarDatos() {
+		return "Vehículo: Placa = " + placa + ", Marca = " + marca + ", Año = " + anioFabricacion + ", ID Registro = " + idRegistro;
+	}
+
+  
+}

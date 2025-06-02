@@ -1,0 +1,96 @@
+package com.clasesBean;
+
+public class Multa {
+    private int codigoMulta;
+    private String tipoInfraccion;
+    private double valor; // Valor de la multa
+    private int puntos; // Puntos en la licencia
+
+    // Constructor por defecto
+    public Multa() {
+        this.codigoMulta = 0;
+        this.tipoInfraccion = "";
+        this.valor = 0.0;
+        this.puntos = 0;
+    }
+
+    // Constructor con parámetros
+    public Multa(int codigoMulta, String tipoInfraccion, double valor, int puntos) {
+        this.codigoMulta = codigoMulta;
+        this.tipoInfraccion = tipoInfraccion;
+
+        // Validación directa en el constructor
+        if (!setValor(valor)) {
+            this.valor = 0.0; // Valor por defecto si no pasa la validación
+        }
+
+        if (!setPuntos(puntos)) {
+            this.puntos = 0; // Valor por defecto si no pasa la validación
+        }
+    }
+
+    // Getters y Setters
+    public int getCodigoMulta() {
+        return codigoMulta;
+    }
+
+    public void setCodigoMulta(int codigoMulta) {
+        this.codigoMulta = codigoMulta;
+    }
+
+    public String getTipoInfraccion() {
+        return tipoInfraccion;
+    }
+
+    public void setTipoInfraccion(String tipoInfraccion) {
+        this.tipoInfraccion = tipoInfraccion;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+
+    // Validar que el valor esté entre $30 y $500
+    public boolean setValor(double valor) {
+        if (valor >= 30 && valor <= 500) {
+            this.valor = valor;
+            return true;
+        } else {
+            System.out.println("Error: El valor de la multa debe estar entre $30 y $500.");
+            return false;
+        }
+    }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    //Validar que los puntos estén entre 1 y 9
+    public boolean setPuntos(int puntos) {
+        if (puntos >= 1 && puntos <= 9) {
+            this.puntos = puntos;
+            return true;
+        } else {
+            System.out.println("Error: Los puntos deben oscilar entre 1 y 9.");
+            return false;
+        }
+    }
+
+    //Metodo para calcular la gravedad de la multa
+    public String calcularGravedad() {
+        if (valor >= 300 && puntos >= 6) {
+            return "Alta";
+        } else if (valor >= 100) {
+            return "Media";
+        } else {
+            return "Leve";
+        }
+    }
+
+    
+    //Método para mostrar la información de la multa
+    public String mostrarMulta() {
+        return "Multa [Código: " + codigoMulta + ", Tipo de Infracción: " + tipoInfraccion + ", Valor: $" + valor   		
+        		+ ", Puntos: " + puntos + ", Gravedad: " + calcularGravedad() + "]";
+    }
+}

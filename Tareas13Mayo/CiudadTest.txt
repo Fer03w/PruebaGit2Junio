@@ -1,0 +1,85 @@
+package com.Ejecucion;
+
+import com.clasesBean.Vehiculo;
+import com.clasesBean.Conductor;
+import com.clasesBean.Multa;
+import com.clasesBean.InspeccionTecnica;
+
+public class CiudadTest {
+
+    public static void main(String[] args) {
+
+        System.out.println("PROBANDO CLASE VEHÍCULO");
+        // Crear un vehículo válido
+        Vehiculo vehiculoUno = new Vehiculo("AAA-1234", "Toyota", 2020, 1237);
+        System.out.println(vehiculoUno.mostrarDatos());
+
+        // Probar un vehículo con un idRegistro inválido
+        Vehiculo vehiculoDos = new Vehiculo("BBB-5678", "Honda", 1995, 4321);
+        System.out.println(vehiculoDos.mostrarDatos());
+
+        //Probar setAnioFabricacion con un año fuera del rango
+        vehiculoUno.setAnioFabricacion(2026);
+        System.out.println(vehiculoUno.mostrarDatos());
+
+        // Validar un idRegistro manualmente
+        System.out.println("ID válido: " + vehiculoUno.validarRegistro(1237));
+        System.out.println("ID válido: " + vehiculoUno.validarRegistro(4321));
+
+        System.out.println("PROBANDO CLASE CONDUCTOR");
+        // Crear un conductor válido
+        Conductor conductorUno = new Conductor("Juan Proaño", "0123456789", "A", 5);
+        System.out.println(conductorUno.resumenConductor());
+
+        // Probar cédula válida
+        System.out.println("Cédula válida: " + conductorUno.validarCedula("0123456789"));
+
+        // Probar cédula inválida
+        System.out.println("Cédula válida: " + conductorUno.validarCedula("1234567890"));
+
+        // Probar experiencia negativa
+        conductorUno.setExperiencia(-3);
+
+        // Probar licencia inválida
+        conductorUno.setLicenciaTipo("D");
+        System.out.println(conductorUno.resumenConductor());
+
+
+        System.out.println("PROBANDO LA CLASE INSPECCION TECNICA");
+        // Crear una inspección válida
+        InspeccionTecnica inspeccionUno = new InspeccionTecnica("ABC123", 2025, "", 3.8);
+        System.out.println(inspeccionUno.detalleInspeccion());
+
+        // Crear una inspección con un código inválido
+        InspeccionTecnica inspeccionDos = new InspeccionTecnica("123ABC", 2025, "", 5.0);
+        System.out.println(inspeccionDos.detalleInspeccion());
+
+        // Modificar el nivel de CO2 y observar el cambio en el estado del vehículo
+        inspeccionUno.setCo2(4.7);
+        System.out.println(inspeccionUno.detalleInspeccion());
+
+        // Validar un código manualmente
+        System.out.println("Código válido: " + inspeccionDos.validarCodigo("XYZ456"));
+        System.out.println("Código válido: " + inspeccionDos.validarCodigo("12XY56"));
+   
+        System.out.println("PROBANDO LA CLASE MULTA");
+        // Crear una multa válida
+        Multa multaUno = new Multa(101, "Exceso de velocidad", 350, 7);
+        System.out.println(multaUno.mostrarMulta());
+
+        // Crear una multa con valores inválidos
+        Multa multaDos = new Multa(102, "No respetar el semáforo", 20, 10);
+        System.out.println(multaDos.mostrarMulta());
+
+        // Modificar valores de la multa
+        multaDos.setValor(120);
+        multaDos.setPuntos(5);
+        System.out.println(multaDos.mostrarMulta());
+
+        // Probar gravedad directamente
+        System.out.println("Gravedad de la multa 1: " + multaUno.calcularGravedad());
+        System.out.println("Gravedad de la multa 2: " + multaDos.calcularGravedad());
+
+        
+    }
+}
